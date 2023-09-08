@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb')
+const { MongoClient, ObjectId } = require('mongodb')
 
 const url = "mongodb://localhost:27017"
 const client = new MongoClient(url)
@@ -8,45 +8,37 @@ const dbName = "myProject"
 async function main(){
   try{
   await client.connect()
-  
   console.log("Connected succesfully")
-
   const db = client.db(dbName)
+  const collection = db.collection('tasks')
 
-  // const result = await db.collection('users').insertOne({
-  //   name: 'Taras',
-  //   age: 18
-  // })
-
-  //   console.log(result.insertedId)
-
-  // const result = await db.collection('users').insertMany([
-  //   {
-  //     name: 'Bob',
-  //     age: 27
-  //   },
-  //   {
-  //     name: 'Jessie',
-  //     age: 24
-  //   }
-  // ])
-
-  // console.log(result.insertedIds)
-
-  const result = await db.collection('tasks').insertMany([
+  const last = await collection.findOne(
     {
-      description: 'Polish lesson',
-      done: true
-    }, {
-      desciption: 'Daily walk',
-      done: false
-    }, {
-      description: 'Get fired',
-      done: true
+      _id: new ObjectId('64fa081e107d47fa78bf32c5')
     }
-  ])
+  )
+  if(last){
+    console.log(last)
+  }
+  else{
+    console.log("Error")
+  }
+
+  const done = await collection.find(
+    {
+      done: false
+    }
+  ).toArray()
+
+  if(done){
+    console.log(done)
+  }
+  else{
+    console.log("Error")
+  }
+
   
-  console.log(result.insertedIds)
+
   } catch(error) {
   console.error("An error occured:", error)
   } finally {
