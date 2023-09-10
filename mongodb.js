@@ -11,14 +11,10 @@ async function main(){
   console.log("Connected succesfully")
   const db = client.db(dbName)
 
-  const update = await db.collection('users').updateOne({
-      name: 'Oksana'
-    },{
-      $inc: {
-        age: 1
-      }
-})
-  console.log('Update successful!')
+  const deleteDoc = await db.collection('users').deleteMany({
+      age: 27
+    })
+  console.log('delete successful!')
   } catch(error) {
   console.error("An error occurred:", error)
   } finally {
