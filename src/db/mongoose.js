@@ -2,22 +2,42 @@ const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost:27017/task-manager-api')
 
-const User = mongoose.model('User', {
-  name: {
+// const User = mongoose.model('User', {
+//   name: {
+//     type: String
+//   }, 
+//   age: {
+//     type: Number
+//   }
+// })
+
+// const me = new User({
+//   name: 'Taras',
+//   age: 18
+// })
+
+// me.save().then(() => {
+//   console.log(me)
+// }).catch((error) => {
+//   console.log('Error!', error)
+// })
+
+const Task = mongoose.model('Task', {
+  description: {
     type: String
-  }, 
-  age: {
-    type: Number
+  },
+  done: {
+    type: Boolean
   }
 })
 
-const me = new User({
-  name: 'Taras',
-  age: 18
+const newtask = new Task({
+  description: 'Watch football',
+  done: false
 })
 
-me.save().then(() => {
-  console.log(me)
+newtask.save().then(() => {
+  console.log(newtask)
 }).catch((error) => {
-  console.log('Error!', error)
+  console.log('Error', error)
 })
