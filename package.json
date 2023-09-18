@@ -1,12 +1,14 @@
 {
-  "scripts":{
+  "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "release": "standard-version"
   },
   "dependencies": {
     "express": "^4.18.2",
     "mongodb": "^6.0.0",
     "mongoose": "^7.5.1",
+    "standard-version": "^9.5.0",
     "validator": "^13.11.0"
   },
   "devDependencies": {
