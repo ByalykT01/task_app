@@ -2,6 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const User = require('../models/user.js')
 
+//user creation
 
 router.post('/users', async (req, res) => {
   const user = new User(req.body)
@@ -14,6 +15,8 @@ router.post('/users', async (req, res) => {
   }
 })
 
+//user list
+
 router.get('/users', async (req, res) => {
   try{
     const users = await User.find({})
@@ -22,6 +25,8 @@ router.get('/users', async (req, res) => {
     res.status(500).send()
   }
 })
+
+//user search by ID
 
 router.get('/users/:id', async (req, res) => {
   const _id = req.params.id
@@ -35,6 +40,8 @@ router.get('/users/:id', async (req, res) => {
     res.status(500).send()
   }
 })
+
+//task update
 
 router.patch('/users/:id', async (req, res) => {
   const updates = Object.keys(req.body)
@@ -57,6 +64,8 @@ router.patch('/users/:id', async (req, res) => {
     res.status(400).send(e)
   }
 })
+
+//task removal
 
 router.delete('/users/:id', async (req, res) => {
   const _id = req.params.id
