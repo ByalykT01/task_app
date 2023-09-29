@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const User = require('../models/user.js')
+const auth = require('../middleware/auth.js')
 
 //user creation
 
@@ -30,13 +31,8 @@ router.post('/users/login', async (req, res) => {
 
 //user list
 
-router.get('/users', async (req, res) => {
-  try{
-    const users = await User.find({})
-    res.status(200).send(users)
-  } catch(e){
-    res.status(500).send()
-  }
+router.get('/users/me', auth, async (req, res) => {
+  res.send(req.user)
 })
 
 //user search by ID
@@ -65,7 +61,6 @@ router.patch('/users/:id', async (req, res) => {
     return res.status(400).send( {error: "Invalid updates!"} )
   }
   try{
-    // const user = await User.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true })
     const user = await User.findById(req.params.id)
 
     updates.forEach((update) => user[update] = req.body[update])
@@ -81,7 +76,7 @@ router.patch('/users/:id', async (req, res) => {
   }
 })
 
-//task removal
+//user removal
 
 router.delete('/users/:id', async (req, res) => {
   const _id = req.params.id
