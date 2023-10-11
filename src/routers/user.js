@@ -2,6 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const User = require('../models/user.js')
 const auth = require('../middleware/auth.js')
+const multer = require('multer')
 
 //user creation
 
@@ -86,11 +87,24 @@ router.patch('/users/me', auth,  async (req, res) => {
 
 router.delete('/users/me', auth, async (req, res) => {
   try {
-      await req.user.deleteOne();
+      await req.user.deleteOne()
       res.status(200).send(req.user)
   } catch (error) {
-      res.status(500).send(error);
+      res.status(500).send(error)
   }
 })
+
+//add avatar
+const upload = multer({
+  dest: 'avatars'
+})
+
+router.post('/me/avatar', auth, upload.single('avatar'), async (req, res) =>{
+  try{
+    await res.status(200).send()
+  } catch (error) {
+    res.status(500).send(error)
+  }
+}) 
 
 module.exports = router
