@@ -1,19 +1,58 @@
-  const sgMail = require('@sendgrid/mail')
+const sgMail = require('@sendgrid/mail')
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-  const msg = {
-    to: "byakykts@gmail.com",
-    from: "byalykt@hotmail.com",
-    subject: "Hello, World!",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mattis magna erat, sed mattis libero auctor non. Nullam sed ligula sit amet tellus vestibulum condimentum at quis diam. Donec ultricies consequat massa nec porta. Nullam congue sapien ut magna euismod, in accumsan nibh hendrerit. Nullam molestie, nisl a tincidunt pellentesque, mauris massa hendrerit ipsum, sed pretium diam tellus vitae tellus. Praesent porta ante id sem scelerisque, ut ornare nisl ullamcorper. Aliquam a elit convallis est cursus scelerisque. Nullam ut est velit. Integer pretium velit lacus, ac scelerisque libero efficitur eu. Nam scelerisque nisi mi, eu ultricies massa pellentesque vitae.",
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>'
-  }
-
-  sgMail
-    .send(msg)
-    .then(() => {
+sgMail.setApiKey('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')
+const welcomeEmail = (email, name) => {
+  sgMail.send({
+    to: email,
+    from: 'byalykt@hotmail.com',
+    subject: 'Thanks for joining in!',
+    html: `
+    <div style="text-align: center; background-color: #f2f2f2; padding: 20px;">
+      <h1>Welcome to Task Website</h1>
+    </div>
+    <div style="text-align: center; padding: 20px;">
+      <p>Dear ${name},</p>
+      <p>We are excited to welcome you to my Task Website! I am dedicated to helping users find and complete tasks, making your academic working journey smoother and more enjoyable.</p>
+      <p>If you have any questions or need assistance, feel free to reach out to our support team at <a href="mailto:byalykt@hotmail.com">byalykt@hotmail.com</a>.</p>
+      <p>Thank you for choosing my Task Website. We wish you the best of luck in your academic endeavors!</p>
+      <p>Sincerely,</p>
+      <p>Taras Byalyk</p>
+    </div>
+    `,
+    }).then(() => {
     console.log('Email sent')
-  })
-    .catch((e) => {
+  }).catch((e) => {
     console.error(e)
   })
+}
+
+const farewellEmail = (email, name) => {
+  sgMail.send({
+    to: email,
+    from: 'byalykt@hotmail.com',
+    subject: 'Account Deletion Confirmation',
+    html: `
+      <div style="text-align: center; background-color: #f2f2f2; padding: 20px;">
+        <h1>Farewell from Task Website</h1>
+      </div>
+      <div style="text-align: center; padding: 20px;">
+        <p>Dear ${name},</p>
+        <p>We're sad to see you go from Task Website ☹. Your account has been successfully deleted.</p>
+        <p>We value your feedback and would like to know if there was something we could have done differently to make your experience better. Your feedback is important to us.</p>
+        <p>If you have any suggestions or comments, please feel free to reply to this email or contact our support team at <a href="mailto:byalykt@hotmail.com">byalykt@hotmail.com</a>.</p>
+        <p>Thank you for being a part of our community. We wish you the best in your future endeavors.</p>
+        <p>Best regards,</p>
+        <p>Taras Byalyk</p>
+      </div>
+    `,
+  }).then(() => {
+    console.log('Email sent')
+  }).catch((e) => {
+    console.error(e)
+  })
+}
+
+module.exports = {
+  welcomeEmail,
+  farewellEmail
+}
