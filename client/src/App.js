@@ -1,35 +1,34 @@
 import './App.css'
-import axios from 'axios'
-import {
-  useEffect,
-  useState
-} from 'react'
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import Home from './pages/Home'
+import Feedback from './pages/Feedback'
 
 function App() {
 
-  const [listOfPosts, setListOfPosts] = useState([])
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/users/list').then((response) => {
-      setListOfPosts(response.data)
-    }).catch((e) => {
-      console.error(e)
-    })
-  }, [])
-
-
   return ( 
-    <div className = "App"> {
-      listOfPosts.map((value) => {
-          return (<div className = 'account' > 
-            <div className="name" >{value.name}</div>
-            <div className="email" >{value.email}</div>
-            <div className="age" >{value.age}</div>
-           </div>
-        )
-      })
-    } 
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header className="Header">
+        <nav>
+            <ul className="header-links">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/feedback">Feedback</Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
+
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/feedback" element={<Feedback />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   )
 }
 
