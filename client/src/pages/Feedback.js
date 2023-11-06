@@ -6,7 +6,14 @@ function Feedback() {
   const [listOfPosts, setListOfPosts] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:5000/feedback/list').then((response) => {
+    let baseURL = '';
+
+    if (process.env.NODE_ENV === 'development') {
+      baseURL = 'http://localhost:5000';
+    } else {
+      baseURL = 'https://task-app-byalykt-frontend.onrender.com/'; 
+    }
+    axios.get(`${baseURL}/feedback/list`).then((response) => {
       setListOfPosts(response.data)
     }).catch((e) => {
       console.error(e)
