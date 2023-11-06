@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import {useEffect, useState} from 'react'
 
 function Users() {
   const [listOfPosts, setListOfPosts] = useState([])
@@ -11,10 +10,10 @@ function Users() {
   if (process.env.NODE_ENV === 'development') {
     baseURL = 'http://localhost:5000';
   } else {
-    baseURL = 'https://task-app-byalykt-frontend.onrender.com/'; 
+    baseURL = 'https://task-app-byalykt-frontend.onrender.com'; 
   }
     axios.get(`${baseURL}/users/list`).then((response) => {
-      setListOfPosts(response.data)
+      setListOfPosts(response.data || [])
     }).catch((e) => {
       console.error(e)
     })
