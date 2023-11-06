@@ -16,7 +16,9 @@ const connectDB = async () => {
 }
 
 const app = express()
-app.use(cors())
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://task-app-byalykt.onrender.com']
+}))
 const port = process.env.PORT
 
 app.use(express.json())
