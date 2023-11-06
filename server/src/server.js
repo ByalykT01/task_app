@@ -4,6 +4,9 @@ const UserRouter = require('./routers/user.js')
 const TaskRouter = require('./routers/task.js')
 const FeedbackRouter = require('./routers/feedback.js')
 
+
+console.log(process.env.MONGODB_URL)
+
 const mongoose = require('mongoose')
 
 const connectDB = async () => {
@@ -16,9 +19,7 @@ const connectDB = async () => {
 }
 
 const app = express()
-app.use(cors({
-  origin: ['http://localhost:5000', 'http://task-app-byalykt.onrender.com']
-}))
+app.use(cors())
 const port = process.env.PORT
 
 app.use(express.json())
