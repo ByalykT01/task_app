@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node src/server.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon src/server.js",
+    "dev": "env-cmd -f ./etc/secrets/dev.env nodemon src/server.js",
     "release": "standard-version",
     "test": "jest"
   },
