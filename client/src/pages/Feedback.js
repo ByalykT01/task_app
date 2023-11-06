@@ -17,9 +17,9 @@ function Feedback() {
     <div>
       {listOfPosts.map((value) => {
           return (<div className = 'account' > 
-            <div className="nickname" >{value.nickname}</div>
-            <div className="title" >{value.title}</div>
-            <div className="description" >{value.description}</div>
+            <div className="name" >{value.nickname}</div>
+            <div className="line1" >{value.title}</div>
+            <div className="line2" >{value.description}</div>
            </div>
         )
       })
