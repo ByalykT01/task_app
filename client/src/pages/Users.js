@@ -1,18 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 
 function Users() {
   const [listOfPosts, setListOfPosts] = useState([])
 
   useEffect(() => {
-  let baseURL = '';
-
-  if (process.env.NODE_ENV === 'development') {
-    baseURL = 'http://localhost:5000';
-  } else {
-    baseURL = 'https://task-app-byalykt.onrender.com'; 
-  }
-    axios.get(`${baseURL}/users/list`).then((response) => {
+    axios.get('/users/list').then((response) => {
       setListOfPosts(response.data || [])
     }).catch((e) => {
       console.error(e)
@@ -21,8 +14,8 @@ function Users() {
 
   return (
     <div>
-      {listOfPosts.map((value) => {
-          return (<div className = 'account' > 
+      {listOfPosts.map((value, index) => {
+          return (<div className = 'account' key={index} > 
             <div className="name" >{[value.username]}</div>
             <div className="line1" >{value.email}</div>
             <div className="line2" >{value.age}</div>

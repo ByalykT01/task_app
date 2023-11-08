@@ -11,6 +11,8 @@ const port = process.env.PORT || 5000;
 const allowedOrigins = ['https://task-app-byalykt-frontend.onrender.com', 'http://localhost:3000'];
 app.use(cors({
   origin: function (origin, callback) {
+    console.log('Request origin:', origin); // Log the origin to check
+
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) === -1) {
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
@@ -18,6 +20,7 @@ app.use(cors({
     }
     return callback(null, true);
   },
+  credentials: true
 }));
 app.use(express.json());
 app.use(UserRouter);
