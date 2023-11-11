@@ -3,6 +3,11 @@
 ## Description
 This project is a combination of a React frontend and a Node.js backend, designed to provide task management functionalities.
 
+## Website
+
+I am happy to announce that this project is available at https://task-app-byalykt-frontend.onrender.com/ . Right now not all
+features are implemented in frontend, but soon everything will be available.
+
 ## Installation
 To run this project locally, follow these steps:
 
@@ -29,9 +34,11 @@ To run this project locally, follow these steps:
 - The API endpoints and functionalities can be accessed through the backend routes as described in the API documentation.
 
 ## Technologies Used
+- MongoDB
+- Express
 - React
 - Node.js
-- MongoDB
+
 
 ## Folder Structure
 - `server`: Contains the Node.js server files.

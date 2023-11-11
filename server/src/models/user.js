@@ -9,12 +9,8 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      trim: true
-    },
-    name: {
-      type: String,
-      // required: true,
-      trim: true
+      trim: true,
+      unique: true
     }, 
     age: {
       type: Number,
@@ -87,8 +83,8 @@ userSchema.methods.toJSON =  function() {
   return userObject
 }
 
-userSchema.statics.findByCredentials = async (email, password) => {
-  const user = await User.findOne({ email })
+userSchema.statics.findByCredentials = async (username, password) => {
+  const user = await User.findOne({ username })
 
   if(!user){
     throw new Error('Unable to log in')

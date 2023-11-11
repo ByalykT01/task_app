@@ -109,7 +109,7 @@ const Register = () => {
         <section>
           <h1>Success!</h1>
           <p>
-            <a href='/signin'>Sign in</a>
+            <a href='/login'>Sign in</a>
           </p>
         </section>
       ) : (
@@ -209,10 +209,10 @@ const Register = () => {
 
           <label htmlFor='match-password'>
             Confirm password: 
-            <span className={validMatch? 'valid' : 'hide'}>
+            <span className={validMatch && validPwd? 'valid' : 'hide'}>
               <FontAwesomeIcon icon={faCheck} />
             </span>
-            <span className={ validMatch ||!matchPwd? 'hide' : 'invalid'}>
+            <span className={ validMatch || !matchPwd? 'hide' : 'invalid'}>
               <FontAwesomeIcon icon={faTimes} />
             </span>
           </label>

@@ -13,7 +13,7 @@ router.post('/users', async (req, res) => {
 
   try{
     await user.save()
-    welcomeEmail(user.email, user.name)
+    welcomeEmail(user.email, user.username)
     const token = await user.generateAuthToken()
     res.status(201).send({user, token})
   } catch(e) {
@@ -25,7 +25,8 @@ router.post('/users', async (req, res) => {
 
 router.post('/users/login', async (req, res) => {
   try{
-    const user = await User.findByCredentials(req.body.email, req.body.password)
+    const user = await User.findByCredentials(req.body.username, req.body.password)
+    console.log("User is "+  user)
     const token = await user.generateAuthToken()
     res.send({ user, token })
   } catch(e){
@@ -98,7 +99,7 @@ router.patch('/users/me', auth,  async (req, res) => {
 router.delete('/users/me', auth, async (req, res) => {
   try {
       await req.user.deleteOne()
-      farewellEmail(req.user.email, req.user.name)
+      farewellEmail(req.user.email, req.user.username)
       res.status(200).send(req.user)
   } catch (error) {
       res.status(500).send(error)

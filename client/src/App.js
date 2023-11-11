@@ -3,6 +3,7 @@ import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import Users from './pages/Users'
 import Feedback from './pages/Feedback'
 import Home from './pages/Home'
+import Login from './pages/Login'
 import Register from './pages/Register'
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
               </li>
               <li>
                 <Link to="/users">Users</Link>
@@ -32,6 +33,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/users" element={<Users />} />
             <Route path="/feedback" element={<Feedback />} />
